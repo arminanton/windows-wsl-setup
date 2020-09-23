@@ -37,3 +37,9 @@ Move the files to wherever you want it to be located. Then, run the EXE file con
 In my case: ubuntu2004.exe
 
 Now, let's setup zsh oh-my-zsh, alternative terminals for windows..
+
+First, install Chocolatey has it will be usefull in the future:  (https://chocolatey.org/install)
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+Using elevated powershell and choco, let's install Fluent Terminal: (include --force if you run into problems)
+choco install fluent-terminal
