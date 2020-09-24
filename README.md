@@ -43,3 +43,51 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 Using elevated powershell and choco, let's install Fluent Terminal: (include --force if you run into problems)
 choco install fluent-terminal
+
+Now open Fluent Terminal through start menu and on its settings set up %system32%/wsl.exe as the default.
+
+Now lets symlink a local windows folder as home and a dev folder as well.
+ln -s /mnt/d/home ~
+ln -s /mnt/d/dev ~
+
+Inside of home, create a downloads folder.
+
+Lets install exa (alternative for ls). First install rust.
+curl https://sh.rustup.rs -sSf | sh
+
+Then lets install cargo.
+sudo apt-get update -y
+sudo apt-get install -y cargo
+
+Using cargo, let's install exa.
+cargo install exa
+export PATH="~/.cargo/bin:$PATH" (details about this should appear in the notes of the previous command)
+
+
+Install bat (alternative for cat) using cargo:
+cargo install --locked bat
+(if you run "bat" into a file and doesn't work, run the line below, otherwise ignore it)
+sudo ln -s ~/.cargo/bin/bat /usr/sbin
+
+Now let's install ZSH and GIT:
+sudo apt install git zsh -y
+
+And Oh-My-Zsh:
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+[in this meanwhile, let's setup the rest as first time]
+
+
+....Download dot files repo and run script to replace files.
+ln -s ~/home/dotfiles/.zshrc ~/
+ln -s ~/home/dotfiles/.zsh_history ~/
+ln -s ~/home/dotfiles/.viminfo ~/
+ln -s ~/home/dotfiles/.sudo_as_admin_successful ~/
+ln -s ~/home/dotfiles/.zcompdump ~/
+ln -s ~/home/dotfiles/.shell.pre-oh-my-zsh ~/
+ln -s ~/home/dotfiles/.profile ~/
+ln -s ~/home/dotfiles/.oh-my-zsh ~/
+ln -s ~/home/dotfiles/.bashrc ~/
+ln -s ~/home/dotfiles/.bash_logout ~/
+ln -s ~/home/dotfiles/.bash_history ~/
