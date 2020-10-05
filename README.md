@@ -85,7 +85,9 @@ sudo apt-get install -y cargo
 Using cargo, let's install exa.
 ```bash
 cargo install exa
-export PATH="~/.cargo/bin:$PATH" (details about this should appear in the notes of the previous command)
+# export PATH="~/.cargo/bin:$PATH" 
+# (details about this should appear in the notes of the previous command)
+# (make sure to include this last command to your zshrc, to allow exa to execute)
 ```
 
 Install bat (alternative for cat) using cargo:
@@ -124,6 +126,12 @@ And Oh-My-Zsh:
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
+Let's install powerlevel10k:
+```bash
+# before that, make sure to set windows terminal to UbuntoMono NF, cause it includes Awesome icons as font
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+```
+
 [in this meanwhile, let's setup the rest as first time]
 
 
@@ -140,10 +148,32 @@ ln -s ~/home/dotfiles/.oh-my-zsh ~/
 ln -s ~/home/dotfiles/.bashrc ~/
 ln -s ~/home/dotfiles/.bash_logout ~/
 ln -s ~/home/dotfiles/.bash_history ~/
+ln -s ~/home/dotfiles/.p10k.zsh ~/
 ```
 
 Change .zshrc to include this:
 ```bash
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+plugins=(git zsh_reload sudo pip heroku fd cp)
+#you may add other plugins if you wish to do soo
+
 ZSH_DISABLE_COMPFIX="true"
+
+alias exa='~/.cargo/bin/exa'
+alias l='exa'
+alias la='exa -a'
+alias ll='exa -lah'
+alias ls='exa --color=auto'
+alias cat='bat --style=plain'
 ```
 
+Installing plugins to oh-my-zsh
+```bash
+#ZSH Navigation Tools
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/psprint/zsh-navigation-tools/master/doc/install.sh)"
+```
+
+First time that you run your zsh after changing the Theme, it will do some prompts which you may config as you wish.
+
+This pretty much completes the setup of customization of wsl with zsh, oh-my-zsh, powerlevel10k.
